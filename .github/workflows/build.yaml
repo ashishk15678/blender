@@ -1,0 +1,30 @@
+name: Meson Build Check
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3 python3-pip ninja-build gcc g++
+          pip3 install meson
+
+      - name: Configure project
+        run: meson setup builddir/
+
+      - name: Compile
+        run: meson compile -C builddir/
+
+      - name: Run Tests
+        run: meson test -C builddir/
