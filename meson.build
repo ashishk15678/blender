@@ -1,6 +1,18 @@
-project('my_project', 'c',
+project('blender', 'c',
   version : '0.1',
-  default_options : ['warning_level=3', 'c_std=c11'])
+  default_options : ['warning_level=3'])
+
+glfw_dep = dependency('glfw3')
+gl_dep = dependency('gl')
+incdir = include_directories('include')
+
+sources = [
+  'src/main.c',
+  'include/glad/src/glad.c'
+]
 
 executable('blender',
-           'src/main.c')
+  sources,
+  include_directories : incdir,
+  dependencies : [glfw_dep, gl_dep],
+)
