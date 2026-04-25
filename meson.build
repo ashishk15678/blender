@@ -8,7 +8,10 @@ incdir = include_directories('include')
 
 sources = [
   'src/main.c',
-  'include/glad/src/glad.c'
+  'include/glad/src/glad.c',
+
+  # below this are single file implementations
+  'core/ui/ui.h'
 ]
 
 executable('blender',
